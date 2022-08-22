@@ -4,7 +4,7 @@ import BurguerButton from './BurguerButton';
 
 
 function Navbar() {
-  const logo = "CyRlogo.png";
+  const logo = "img/CyRlogo.png";
   const [clicked, setClicked] = useState(false);
   console.log(clicked);
   const handleClick = () => {
@@ -22,7 +22,6 @@ function Navbar() {
               </div>
               <div className='icon-container'>
                 <a href='#'><i class='bx bx-user-circle'></i></a>
-                <a href='#'><i class='bx bx-cart' ></i></a>
               </div>
               <div className='burguerButton'>
               <BurguerButton clicked={clicked} handleClick={handleClick}/>
@@ -39,6 +38,7 @@ const NavContainer = styled.nav `
   display:flex;
   flex-direction:row;
   justify-content: space-between;
+  background: #fff;
   .logo {
     width: 122px;
     margin: 8px 0px 0px 40px;
@@ -61,6 +61,9 @@ const NavContainer = styled.nav `
     margin-right:auto;
     text-align:center;
     transition: all .5s ease;
+    background: #fff;
+    height: 100%;
+    z-index: 1;
     @media screen and (min-width: 768.5px) {
       padding-top:30px;
       position:initial;
@@ -80,7 +83,6 @@ const NavContainer = styled.nav `
         margin-bottom:15px;
         font-size:20px;
       }
-      m
       &:hover {
         color: #8167a9;
       }
