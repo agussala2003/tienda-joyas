@@ -6,3 +6,9 @@
   box-sizing: border-box;
   font-family: 'Quicksand', sans-serif;
 }
+
+.nav-links {
+  color: #000;
+  font-weight: 600;
+  font-size: 25px;
+}

@@ -1,140 +1,60 @@
-import React,{useState} from 'react'
-import styled from 'styled-components'
-import BurguerButton from './BurguerButton';
+import React,{useState} from 'react';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import CartWidget from './CartWidget.js';
+import ItemListContainer from './ItemListContainer.js';
+import styled from 'styled-components';
+import Main from './Main.js';
 
-
-function Navbar() {
-  const logo = "img/CyRlogo.png";
-  const [clicked, setClicked] = useState(false);
-  console.log(clicked);
+function NavScrollExample() {
+  const [expanded, setExpanded] = useState(false);
   const handleClick = () => {
-    // Cuando esta true lo pasa a false y vice versa
-    setClicked(!clicked);
+    setExpanded(!expanded);
+    console.log(expanded);
   }
   return (
-    <>
-        <NavContainer>
-            <img className='logo'src={logo}></img>
-              <div className={`nav-container ${clicked ? 'active' : ''}`}>
-                <a onClick={handleClick} className='active' href='#'>Inicio</a>
-                <a onClick={handleClick} href='#'>Productos</a>
-                <a onClick={handleClick} href='#'>About</a>
-              </div>
-              <div className='icon-container'>
-                <a href='#'><i class='bx bx-user-circle'></i></a>
-              </div>
-              <div className='burguerButton'>
-              <BurguerButton clicked={clicked} handleClick={handleClick}/>
-              </div>
-              <BgDiv className={`initial ${clicked ? 'active' : ''}`}></BgDiv>
-        </NavContainer>
-    </>
-  )
+    <NavBarContainer>
+    <Navbar text="dark" bg="light" expand="lg">
+      <Container fluid>
+        <Navbar.Brand style={{fontWeight:'bold'}}>AcceShop</Navbar.Brand>
+        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Collapse id="navbarScroll">
+          <Nav
+            className="me-auto my-2 my-lg-0"
+            style={{ maxHeight: '150px' }}
+            navbarScroll
+          >
+            <Nav.Link style={{color: '#000'}} className='nav-links' href="#">Tienda</Nav.Link>
+            <Nav.Link style={{color: '#000'}} className='nav-links' href="#">Productos de oro</Nav.Link>
+            <Nav.Link style={{color: '#000'}} className='nav-links' href="#">Productos de plata</Nav.Link>
+          </Nav>
+          <div style={{cursor:'pointer',fontSize:'25px'}} onClick={handleClick}> 
+            <CartWidget/>
+          </div>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+    <div className={`item-list-container ${expanded ? '' : 'inactive'}`}>
+      <ItemListContainer/>
+    </div>
+    <div className={`main-container ${expanded ? 'inactive' : ''}`}>
+      <Main/>
+    </div>
+    </NavBarContainer>
+  );
 }
 
-export default Navbar;
+export default NavScrollExample;
 
-const NavContainer = styled.nav `
-  display:flex;
-  flex-direction:row;
-  justify-content: space-between;
-  background: #fff;
-  .logo {
-    width: 122px;
-    margin: 8px 0px 0px 40px;
-    @media screen and (max-width:768.5px ){
-      width:110px;
-      height:55px;
-      margin: 12px 0px 0px 20px;
-    }
-    @media screen and (max-width:428.5px ){
-      width:90px;
-      height:45px;
-      margin: 20px 0px 0px 10px;
-    }
+const NavBarContainer = styled.div`
+  .item-list-container{
+    display: block;
   }
-  .nav-container {
-    position: absolute;
-    top:-700px;
-    left:-2000px;
-    margin-left:auto;
-    margin-right:auto;
-    text-align:center;
-    transition: all .5s ease;
-    background: #fff;
-    height: 100%;
-    z-index: 1;
-    @media screen and (min-width: 768.5px) {
-      padding-top:30px;
-      position:initial;
-      margin:0;
-      display:flex;
-      a {
-        margin-right:55px;
-      }
-    }
-    a {
-      font-weight: 500;
-      text-decoration:none;
-      color:#000;
-      transition: all 200ms linear;
-      display:block;
-      @media screen and (max-width: 768.5px) {
-        margin-bottom:15px;
-        font-size:20px;
-      }
-      &:hover {
-        color: #8167a9;
-      }
-    }
-    .active {
-      color: #8167a9;
-    }
-  }
-  .nav-container.active {
-    width:100%;
-    display:block;
-    position:absolute;
-    margin-left:auto;
-    margin-right:auto;
-    top:15%;
-    left:5px;
-    right:0;
-    text-align:center;
-    @media screen and (max-width: 428.5px) {
-      left:-14px;
-    }
-  }
-  .icon-container {
-    padding: 30px 40px 0px 0px;
-    a {
-      text-decoration: none;
-      i {
-        font-size: 25px;
-        color: #000;
-        padding-left:15px;
-      }
-    }
-  }
-  .burguerButton {
-    @media screen and (min-width: 768.5px) {
-      display: none;
-    }
-  }
-`
-
-const BgDiv = styled.div`
-  position:absolute;
-  top:-1000px;
-  left:-1000px;
-  width:100%;
-  height:100%;
-  z-index:-1;
-  transition: all .6s ease;
-  &.active{
-    top:0;
-    left:0;
-    width: 100%;
-    height: 100%;
+  .inactive{
+    display: none;
   }
 `
