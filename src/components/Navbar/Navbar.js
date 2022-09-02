@@ -5,17 +5,12 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import CartWidget from './CartWidget.js';
-import ItemListContainer from './ItemListContainer.js';
+import CartWidget from '../CartWidget/CartWidget.js';
 import styled from 'styled-components';
-import Main from './Main.js';
+import {Link} from 'react-router-dom';
+
 
 function NavScrollExample() {
-  const [expanded, setExpanded] = useState(false);
-  const handleClick = () => {
-    setExpanded(!expanded);
-    console.log(expanded);
-  }
   return (
     <NavBarContainer>
     <Navbar text="dark" bg="light" expand="lg">
@@ -28,22 +23,16 @@ function NavScrollExample() {
             style={{ maxHeight: '150px' }}
             navbarScroll
           >
-            <Nav.Link style={{color: '#000'}} className='nav-links' href="#">Tienda</Nav.Link>
-            <Nav.Link style={{color: '#000'}} className='nav-links' href="#">Productos de oro</Nav.Link>
-            <Nav.Link style={{color: '#000'}} className='nav-links' href="#">Productos de plata</Nav.Link>
+            <Nav.Link className='nav-links' href="#"><Link style={{color: '#000',textDecoration:'none'}} to='/'>Tienda</Link></Nav.Link>
+            <Nav.Link className='nav-links' href="#"><Link style={{color: '#000',textDecoration:'none'}} to='/Oro'>Productos de oro</Link></Nav.Link>
+            <Nav.Link className='nav-links' href="#"><Link style={{color: '#000',textDecoration:'none'}} to='/Plata'>Productos de plata</Link></Nav.Link>
           </Nav>
-          <div style={{cursor:'pointer',fontSize:'25px'}} onClick={handleClick}> 
+          <div style={{cursor:'pointer',fontSize:'25px'}}> 
             <CartWidget/>
           </div>
         </Navbar.Collapse>
       </Container>
     </Navbar>
-    <div className={`item-list-container ${expanded ? '' : 'inactive'}`}>
-      <ItemListContainer/>
-    </div>
-    <div className={`main-container ${expanded ? 'inactive' : ''}`}>
-      <Main/>
-    </div>
     </NavBarContainer>
   );
 }
@@ -51,10 +40,4 @@ function NavScrollExample() {
 export default NavScrollExample;
 
 const NavBarContainer = styled.div`
-  .item-list-container{
-    display: block;
-  }
-  .inactive{
-    display: none;
-  }
 `
