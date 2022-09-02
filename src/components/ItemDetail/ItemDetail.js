@@ -1,8 +1,17 @@
-import React from 'react'
+import React,{useState} from 'react'
 import styled from 'styled-components';
-import {products} from "../Database/Database";
+import ItemCount from '../ItemCount/ItemCount.js';
 
 function ItemDetail({item}) {
+    const [count,setCount] = useState(0)
+    const [show,setShow] = useState(true)
+    const onAdd = (cantidad)=>{
+        setCount(cantidad)
+        console.log('se agregaron',cantidad,'productos')
+        item.stock = item.stock - cantidad;
+        setShow(!show)
+    }
+    console.log(count)
   return (
     // ItemDetail
     <ItemDetailStyled>
@@ -14,6 +23,9 @@ function ItemDetail({item}) {
             <h2>{item.productName}</h2>
             <p>{item.productDescription}</p>
             <p>${item.productPrice}</p>
+        </div>
+        <div className={`item-detail-count ${show ? '' : 'inactive'}`}>
+            <ItemCount stock={item.stock} initial={1} onAdd={onAdd}/>
         </div>
     </div>
     </ItemDetailStyled>
@@ -57,6 +69,9 @@ const ItemDetailStyled = styled.div`
             justify-content: center;
             align-items: center;
             flex-direction: column;
+        }
+        .inactive{
+            display: none;
         }
     }
 `

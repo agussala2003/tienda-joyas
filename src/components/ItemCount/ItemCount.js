@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import styled from 'styled-components'
 
 function ItemCount({stock,initial,onAdd}) {
     const [count,setCount] = useState(initial)
@@ -15,16 +16,70 @@ function ItemCount({stock,initial,onAdd}) {
         }
     }
   return (
-    <div className='estilosContador'>
-            <p>Stock disponible: {stock}</p>
-            <div className='contenedorControles'>
-                <button disabled={stock===0} onClick={decrementar} className='botonControl'>-</button>
-                <p>{count}</p>
-                <button disabled={stock===0} onClick={incrementar} className='botonControl'>+</button>
+    <ContadorStyled>
+        <div className="item-count">
+            <div className="item-count-btn">
+                <button onClick={decrementar}>-</button>
             </div>
-            <button disabled={stock === 0} className='botonAgregar'>Agregar al carrito</button>
-    </div>
+            <div className="item-count-number">
+                <p>{count}</p>
+            </div>
+            <div className="item-count-btn">
+                <button onClick={incrementar}>+</button>
+            </div>
+            <div className="item-confrim-btn">
+                <button onClick={()=>onAdd(count)}>Agregar al carrito</button>
+            </div>
+        </div>
+    </ContadorStyled>
   )
 }
 
 export default ItemCount
+
+const ContadorStyled = styled.div`
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .item-count{
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .item-count-btn{
+                width: 50px;
+                height: 50px;
+                background-color: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                button{
+                    width: 100%;
+                    height: 100%;
+                    background-color: #fff;
+                    border: none;
+                    font-size: 30px;
+                    font-weight: 700;
+                    cursor: pointer;
+                    }
+                    }
+                    .item-count-number{
+                        width: 50px;
+                        height: 50px;
+                        background-color: #fff;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        p{
+                            font-size: 30px;
+                            font-weight: 700;
+                            }
+                            }
+                            }
+                            
+                            `
