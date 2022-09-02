@@ -1,30 +1,15 @@
 import React,{useState,useEffect} from 'react'
 import {products} from "../Database/Database";
 import ItemDetail from "../ItemDetail/ItemDetail";
+import {useParams} from "react-router-dom";
 
 function ItemDetailContainer() {
-    const [item, setItem] = useState({});
+    const {id} = useParams();
 
-    const getItem = ()=>{
-        return new Promise((resolve, reject)=>{
-            resolve(products)
-        })
-    }
-
-    useEffect(()=>{
-        const getProducto = async()=>{
-            const resultado = await getItem();
-            const producto = resultado.find(item=>item.productId === 1);
-            setItem(producto);
-        }
-        getProducto();
-    },[])
-
-    console.log('item:', item)
   return (
     <div className="item-detail-container">
             <p style={{width:"100%", color: "white"}}>item detail container</p>
-            <ItemDetail item={item}/>
+            <ItemDetail item={products[(id - 1)]}/>
     </div>
   )
 }

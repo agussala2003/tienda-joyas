@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import {products} from "../Database/Database";
 
 function ItemDetail({item}) {
   return (
