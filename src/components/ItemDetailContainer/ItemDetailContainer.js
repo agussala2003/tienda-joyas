@@ -7,7 +7,7 @@ function ItemDetailContainer() {
     const {id} = useParams();
 
   return (
-    <div className="item-detail-container">
+    <div style={{marginBottom : '50px'}} className="item-detail-container">
             <p style={{width:"100%", color: "white"}}>item detail container</p>
             <ItemDetail item={products[(id - 1)]}/>
     </div>

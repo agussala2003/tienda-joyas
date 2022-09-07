@@ -9,9 +9,11 @@ function ItemList({items}) {
         <div className="item-list">
             {items.map((item)=>{
                 return(
-                    <Link to={`/item/${item.productId}`} key={item.productId}>
+                    <div>
+                    <Link style={{ textDecoration: 'none' }} to={`/item/${item.productId}`} key={item.productId}>
                         <Item item={item}/>
                     </Link>
+                    </div>
                 )
             })}
         </div>
@@ -36,5 +38,9 @@ const ItemListStyled = styled.div`
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
+        text-decoration: none;
+        div {
+            text-decoration: none;
+        }
     }
 `

@@ -59,6 +59,9 @@ const ItemDetailStyled = styled.div`
             img{
                 width: 500px;
                 object-fit: cover;
+                @media screen and (max-width: 768px){
+                    width: 80%;
+                }
             }
         }
         .item-detail-content{
@@ -69,6 +72,13 @@ const ItemDetailStyled = styled.div`
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            @media screen and (max-width: 768px){
+                width: 80%;
+            }
+            h2{
+                font-size: 2rem;
+                margin-bottom: 10px;
+            }   
         }
         .inactive{
             display: none;

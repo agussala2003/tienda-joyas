@@ -45,41 +45,70 @@ const ContadorStyled = styled.div`
     justify-content: center;
     align-items: center;
     .item-count{
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .item-count-btn{
             width: 100%;
             height: 100%;
             background-color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
-            .item-count-btn{
+            button{
                 width: 50px;
                 height: 50px;
-                background-color: #fff;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                button{
+                background-color: #000;
+                color: #fff;
+                font-size: 30px;
+                border: none;
+                cursor: pointer;
+                }
+                }
+                .item-count-number{
                     width: 100%;
                     height: 100%;
                     background-color: #fff;
-                    border: none;
-                    font-size: 30px;
-                    font-weight: 700;
-                    cursor: pointer;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    @media screen and (max-width: 768px){
+                        width: 80%;
                     }
-                    }
-                    .item-count-number{
-                        width: 50px;
-                        height: 50px;
-                        background-color: #fff;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        p{
-                            font-size: 30px;
-                            font-weight: 700;
+                    p{
+                        font-size: 30px;
+                        margin: 0 10px 0 10px;
+                        @media screen and (max-width: 768px){
+                            font-size: 20px;
+                        }
+                        }
+                        }
+                        .item-confrim-btn{
+                            width: 100%;
+                            height: 100%;
+                            background-color: #fff;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            @media screen and (max-width: 768px){
+                                width: 80%;
                             }
-                            }
-                            }
-                            
-                            `
+                            button{
+                                margin-left: 10px;
+                                width: 200px;
+                                height: 50px;
+                                background-color: #000;
+                                color: #fff;
+                                font-size: 20px;
+                                border: none;
+                                cursor: pointer;
+                                @media screen and (max-width: 768px){
+                                    width: 180px;
+                                }
+                                }
+                                }
+                                }
+                                `

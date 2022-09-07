@@ -48,6 +48,7 @@ const ItemListContainerStyled = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    flex-wrap: wrap;
     h1{
         color: #000;
     }
