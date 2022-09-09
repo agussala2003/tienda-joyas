@@ -12,3 +12,11 @@
   font-weight: 600;
   font-size: 25px;
 }
+
+.itemCart_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #000;
+}

@@ -1,15 +1,19 @@
 import React,{useState} from 'react'
 import styled from 'styled-components';
 import ItemCount from '../ItemCount/ItemCount.js';
+import {UseCartContext} from '../context/CartContext.js';
+import {Link} from 'react-router-dom'
 
 function ItemDetail({item}) {
     const [count,setCount] = useState(0)
     const [show,setShow] = useState(true)
+    const {addProduct} = UseCartContext();
     const onAdd = (cantidad)=>{
         setCount(cantidad)
         console.log('se agregaron',cantidad,'productos')
         item.stock = item.stock - cantidad;
         setShow(!show)
+        addProduct(item,cantidad);
     }
     console.log(count)
   return (
@@ -26,6 +30,16 @@ function ItemDetail({item}) {
         </div>
         <div className={`item-detail-count ${show ? '' : 'inactive'}`}>
             <ItemCount stock={item.stock} initial={1} onAdd={onAdd}/>
+        </div>
+        <div>
+            <Link style={{
+                textDecoration: 'none',
+                color: '#fff',
+                padding: '10px',
+                backgroundColor: '#000',
+                borderRadius: '5px',
+                fontSize: '20px'
+            }} to='/cart' className={`item-detail-button ${show ? 'inactive' : ''}`}>Terminar mi compra</Link>
         </div>
     </div>
     </ItemDetailStyled>
