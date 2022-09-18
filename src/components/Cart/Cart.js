@@ -2,9 +2,29 @@ import React from 'react'
 import styled from 'styled-components'
 import { UseCartContext } from '../context/CartContext'
 import {Link} from 'react-router-dom'
+import { getFirestore, collection , addDoc } from 'firebase/firestore'
 
 const Cart = ({product}) =>{
     const {cart,removeItem,totalPrice} = UseCartContext();
+
+    const order = {
+        buyer: {
+            name: 'Juan',
+            phone: '123456789',
+            email: 'juan@gmail.com'
+        },
+        items: cart.map(item => ({ id: item.item.productId, title: item.item.productName, price: item.item.productPrice, quantity: item.quantity })),
+        total: totalPrice(),
+    }
+    
+    const handleCheckout = () => {
+        const db = getFirestore();
+        const orders = collection(db, 'orders');
+        addDoc(orders, order)
+        .then(({id}) => {
+            console.log(id)
+        })
+    }
 
     if (cart.length === 0) {
         return (
@@ -80,7 +100,7 @@ const Cart = ({product}) =>{
                                 border: 'none',
                                 borderRadius: '5px',
                                 cursor: 'pointer',
-                            }}>Finalizar compra</button>
+                            }} onClick={handleCheckout}>Finalizar compra</button>
                     </div>
                     </>
                 )

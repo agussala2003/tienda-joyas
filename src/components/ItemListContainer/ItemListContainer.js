@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import {products} from '../Database/Database.js'
 import ItemList from '../ItemList/ItemList.js'
 import {useParams} from 'react-router-dom'
+import {getFirestore, collection, getDocs, query, where} from 'firebase/firestore';
 
 function ItemListContainer() {
 
@@ -17,15 +18,22 @@ function ItemListContainer() {
     })
 
     useEffect(()=>{
-        promesa.then(resultado=>{
-            if(!tipoProducto){
-                setProductos(resultado)
-            } else{
-                const nuevaLista = resultado.filter(item=>item.productCategory === tipoProducto);
-                // console.log('nuevaLista',nuevaLista)
-                setProductos(nuevaLista)
+        const querydb = getFirestore();
+        const queryCollection = collection(querydb, "items");
+        if(tipoProducto){
+            const queryFilter = query(queryCollection, where("productCategory", "==", tipoProducto));
+            getDocs(queryFilter)
+            .then(res => {
+                setProductos(res.docs.map(doc => ({theId: doc.id,...doc.data()})))
+            })
+        }else{
+            getDocs(queryCollection)
+            .then(res => {
+                setProductos(res.docs.map(doc => ({theId: doc.id,...doc.data()})))
             }
-        })
+            )
+            .catch(err => console.log(err))
+        }
     },[tipoProducto])
 
   return (
