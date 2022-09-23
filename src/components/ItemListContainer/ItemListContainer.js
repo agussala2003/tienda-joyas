@@ -1,21 +1,14 @@
 import React,{useState,useEffect} from 'react'
 import styled from 'styled-components'
-import {products} from '../Database/Database.js'
 import ItemList from '../ItemList/ItemList.js'
 import {useParams} from 'react-router-dom'
 import {getFirestore, collection, getDocs, query, where} from 'firebase/firestore';
 
 function ItemListContainer() {
 
-  const {tipoProducto} = useParams();
+    const {tipoProducto} = useParams();
     console.log(tipoProducto)
     const [productos, setProductos] = useState([]);
-
-    const promesa = new Promise((resolve, reject)=>{
-        setTimeout(() => {
-            resolve(products);
-        }, 2000);
-    })
 
     useEffect(()=>{
         const querydb = getFirestore();

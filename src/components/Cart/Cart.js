@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 import { UseCartContext } from '../context/CartContext'
 import {Link} from 'react-router-dom'
 import { getFirestore, collection , addDoc } from 'firebase/firestore'
@@ -24,6 +23,8 @@ const Cart = ({product}) =>{
         .then(({id}) => {
             console.log(id)
         })
+        cart.length = 0;
+        alert('Compra realizada con exito');
     }
 
     if (cart.length === 0) {
